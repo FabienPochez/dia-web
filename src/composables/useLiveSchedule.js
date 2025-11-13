@@ -58,12 +58,12 @@ async function fetchLiveSchedule(isInitialLoad = false) {
     error.value = null
     
     const result = await getNowPlaying()
-    console.log('🎵 useLiveSchedule getNowPlaying result:', result)
+    if (import.meta.env.DEV) console.log('🎵 useLiveSchedule getNowPlaying result:', result)
     currentShow.value = result
     scheduleNextTimers(result)
   } catch (err) {
     error.value = err.message
-    console.warn('⚠️ useLiveSchedule failed to fetch current show:', err.message)
+    if (import.meta.env.DEV) console.warn('⚠️ useLiveSchedule failed to fetch current show:', err.message)
   } finally {
     if (isInitialLoad) {
       isLoading.value = false
@@ -92,7 +92,7 @@ function scheduleHeartbeat() {
   heartbeatTimeout = setTimeout(() => {
     heartbeatTimeout = null
     if (!appIsActive) return
-    console.log('[LiveSchedule] heartbeat fetch')
+    if (import.meta.env.DEV) console.log('[LiveSchedule] heartbeat fetch')
     fetchLiveSchedule(false)
   }, HEARTBEAT_MS + jitter())
 }
@@ -112,7 +112,7 @@ function scheduleNextTimers(show) {
 
   const tick = async (label) => {
     if (!appIsActive) return
-    console.log(`[LiveSchedule] boundary tick: ${label}`)
+    if (import.meta.env.DEV) console.log(`[LiveSchedule] boundary tick: ${label}`)
     await fetchLiveSchedule(false)
   }
 

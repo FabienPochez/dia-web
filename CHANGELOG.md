@@ -40,6 +40,9 @@ EXAMPLE
 
 ## Unreleased
 
+### Debug & Logging — 2025-11-13
+- **fix · debug** — Gated all debug console logs behind DEV environment checks to prevent production logging.
+
 ### Layout & UI Improvements — 2025-11-13
 - **feat · layout** — Redesigned WaitingPage with responsive 3-column layout (desktop) and single column (mobile).
 - **feat · layout** — Removed app-scroll class from main App container for standard web scrolling.

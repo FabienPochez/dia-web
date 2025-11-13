@@ -15,7 +15,7 @@ function notify(set, payload) {
     try {
       cb(payload)
     } catch (err) {
-      console.warn('[Lifecycle] listener error', err)
+      if (import.meta.env.DEV) console.warn('[Lifecycle] listener error', err)
     }
   })
 }
@@ -39,9 +39,11 @@ async function maybeRefreshAuth() {
   lastAuthRefresh = now
   try {
     const { refresh } = await import('@/lib/authClient')
-    await refresh().catch((err) => console.warn('Auth refresh on resume failed:', err))
+    await refresh().catch((err) => {
+      if (import.meta.env.DEV) console.warn('Auth refresh on resume failed:', err)
+    })
   } catch (err) {
-    console.warn('Auth refresh hook load failed:', err)
+    if (import.meta.env.DEV) console.warn('Auth refresh hook load failed:', err)
   }
 }
 

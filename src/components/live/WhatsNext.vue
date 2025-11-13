@@ -164,12 +164,12 @@ async function fetchUpcoming(isInitialLoad = false) {
     
     const futureItems = json.docs || []
     
-    console.log(`📅 Found ${futureItems.length} future shows`)
+    if (import.meta.env.DEV) console.log(`📅 Found ${futureItems.length} future shows`)
     allItems.value = futureItems
     
   } catch (err) {
     error.value = err.message
-    console.warn('⚠️ Failed to fetch upcoming shows:', err.message)
+    if (import.meta.env.DEV) console.warn('⚠️ Failed to fetch upcoming shows:', err.message)
   } finally {
     if (isInitialLoad) {
       isLoading.value = false

@@ -184,7 +184,7 @@ async function setSource({ id, src, title, mode = 'podcast', cover = '', genres,
       
       audioRef.value = adapter.getAudio?.() || null
     } catch (e) {
-      console.warn('Load interrupted or blocked:', e)
+      if (__DBG__) console.warn('Load interrupted or blocked:', e)
     }
   }
 
@@ -290,7 +290,7 @@ async function setDefaultLive() {
       })
     }
   } catch (err) {
-    console.warn('⚠️ setDefaultLive failed to fetch current show:', err.message)
+    if (import.meta.env.DEV) console.warn('⚠️ setDefaultLive failed to fetch current show:', err.message)
   }
 }
 

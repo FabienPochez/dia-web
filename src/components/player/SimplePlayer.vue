@@ -118,7 +118,7 @@ function updateMediaSession(title, artist, artworkUrl) {
       audioRef.value.pause()
     })
     
-    if (globalThis.DIA_DEBUG) console.log('[MEDIA SESSION] Web MediaSession updated', { title, artist })
+    if (import.meta.env.DEV && globalThis.DIA_DEBUG) console.log('[MEDIA SESSION] Web MediaSession updated', { title, artist })
   }
 }
 </script>

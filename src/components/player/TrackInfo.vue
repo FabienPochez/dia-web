@@ -103,7 +103,7 @@ function onSliderDrag() {
 function onSliderCommit() {
   isDragging.value = false
   const newTime = dragValue.value[0]
-  if (globalThis.DIA_DEBUG ?? true) console.log('[UI] seek request', { to: newTime, via: 'facade' });
+  if (import.meta.env.DEV && (globalThis.DIA_DEBUG ?? false)) console.log('[UI] seek request', { to: newTime, via: 'facade' });
   seek(newTime)
 }
 

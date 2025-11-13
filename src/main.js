@@ -27,27 +27,29 @@ debugLog('[BOOT] Vue app mounted successfully')
 if (!window.__DIA_ERROR_LISTENERS__) {
   window.__DIA_ERROR_LISTENERS__ = true
 
-  window.addEventListener('error', (e) => {
-    console.log('[CRASH][window.error]', {
-      message: e.message,
-      filename: e.filename,
-      lineno: e.lineno,
-      colno: e.colno,
-      error: e.error ? {
-        name: e.error.name,
-        message: e.error.message,
-        stack: e.error.stack,
-      } : null,
-      errorString: e?.error?.stack || e?.error?.message || String(e?.error) || 'Unknown error',
+  if (import.meta.env.DEV) {
+    window.addEventListener('error', (e) => {
+      console.log('[CRASH][window.error]', {
+        message: e.message,
+        filename: e.filename,
+        lineno: e.lineno,
+        colno: e.colno,
+        error: e.error ? {
+          name: e.error.name,
+          message: e.error.message,
+          stack: e.error.stack,
+        } : null,
+        errorString: e?.error?.stack || e?.error?.message || String(e?.error) || 'Unknown error',
+      });
     });
-  });
 
-  window.addEventListener('unhandledrejection', (e) => {
-    console.log('[CRASH][unhandledrejection]', {
-      reason: e?.reason?.stack || e?.reason?.message || e?.reason || 'Unknown rejection',
-      errorString: e?.reason?.stack || e?.reason?.message || String(e?.reason) || 'Unknown rejection',
+    window.addEventListener('unhandledrejection', (e) => {
+      console.log('[CRASH][unhandledrejection]', {
+        reason: e?.reason?.stack || e?.reason?.message || e?.reason || 'Unknown rejection',
+        errorString: e?.reason?.stack || e?.reason?.message || String(e?.reason) || 'Unknown rejection',
+      });
     });
-  });
+  }
 }
 
 auth.init({
