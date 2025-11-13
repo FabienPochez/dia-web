@@ -40,6 +40,26 @@ EXAMPLE
 
 ## Unreleased
 
+### Layout & UI Improvements — 2025-11-13
+- **feat · layout** — Redesigned WaitingPage with responsive 3-column layout (desktop) and single column (mobile).
+- **feat · layout** — Removed app-scroll class from main App container for standard web scrolling.
+- **feat · ui** — Updated WaitingPage styling with cards, social links (Instagram, Facebook, SoundCloud), and brand messaging.
+- **feat · ui** — Added logo assets in public/img directory.
+- **fix · ui** — Removed hover effects and click handlers from WhatsNext component items (display-only).
+
+### Player & Components — 2025-11-13
+- **feat · player** — Added live info preload to SimplePlayer component on mount (setDefaultLive).
+- **feat · player** — Updated SimplePlayer styling (rounded-lg, shadow, border).
+- **feat · component** — Improved WhatsNext component layout and spacing with flex-col gap-4.
+
+### SEO & Meta Tags — 2025-11-13
+- **feat · seo** — Added comprehensive meta tags in index.html (description, keywords, author, robots, canonical).
+- **feat · seo** — Implemented Open Graph meta tags for social media sharing (Facebook).
+- **feat · seo** — Added Twitter Card meta tags (summary_large_image).
+- **feat · seo** — Added geographic metadata (geo.region=FR, geo.placename="Parc ducontenia, Saint-jean-De-Luz 64500").
+- **feat · seo** — Implemented favicon using logo-smiley.png with multiple sizes (32x32, 192x192, 512x512, apple-touch-icon).
+- **feat · seo** — Set HTML lang attribute to "en" (English) and added language meta tag.
+
 ### Initial Setup — 2025-11-13
 - **feat · setup** — Initial project setup with Vue 3, Tailwind CSS v4, and shadcn-vue.
 - **feat · player** — Created HTML5 audio player (SimplePlayer) with play/pause and seek controls.

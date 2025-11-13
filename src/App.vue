@@ -1,5 +1,8 @@
 <template>
-  <div id="app" class="app-scroll">
+  <div 
+  id="app"
+  
+  >
     <WaitingPage />
   </div>
 </template>

@@ -24,19 +24,18 @@
     </div>
     
     <!-- Content -->
-    <div v-else class=" space-y-1">
+    <div v-else class=" flex flex-col gap-4">
       <!-- Today items -->
       <div 
       v-if="displayedTodayItems.length > 0"
-      class="bg-neutral-900 rounded-lg  p-4"
+      class="bg-neutral-900 rounded-lg shadow border border-neutral-700 p-4"
       >
-      <div class="text-sm uppercase font-semibold mb-2">Today</div>
+      <div class="text-sm uppercase font-semibold">Today</div>
       <hr class="border-neutral-700 mb-4">
         <div 
           v-for="item in displayedTodayItems" 
           :key="item._id" 
-          class="flex items-start gap-4 text-sm text-white mb-2 cursor-pointer hover:bg-neutral-800 rounded py-1 transition-colors"
-          @click="openSchedule"
+          class="flex items-start gap-4 text-sm text-white mb-2 rounded py-1"
         >
           <div class="font-medium whitespace-nowrap w-24 flex-shrink-0">{{ formatTimeRange(item.scheduledAt, item.scheduledEnd) }}</div>
           <div class="flex-1 font-semibold uppercase">{{ item.title }}</div>
@@ -44,32 +43,21 @@
       </div>
       
       <!-- Tomorrow header + items -->
-      <div v-if="displayedTomorrowItems.length > 0" class="bg-neutral-900 rounded-lg p-4 mt-2">
+      <div v-if="displayedTomorrowItems.length > 0" class="bg-neutral-900 rounded-lg border border-neutral-700 shadow p-4">
         
         <div class="text-sm uppercase font-semibold mb-2">Tomorrow</div>
         <hr class="border-neutral-700 mb-4">
         <div 
           v-for="item in displayedTomorrowItems" 
           :key="item._id" 
-          class="flex items-start gap-4 text-sm text-white mb-2 cursor-pointer hover:bg-neutral-800 rounded py-1 transition-colors"
-          @click="openSchedule"
+          class="flex items-start gap-4 text-sm text-white mb-2 rounded py-1"
         >
           <div class="font-medium whitespace-nowrap w-24 flex-shrink-0">{{ formatTimeRange(item.scheduledAt, item.scheduledEnd) }}</div>
           <div class="flex-1 font-semibold uppercase">{{ item.title }}</div>
         </div>
       </div>
       
-      <!-- Show more button -->
-      <div class="mt-5 text-center">
-        <Button 
-          @click="openSchedule" 
-          
-          class="rounded-full"
-          
-        >
-          View Full Schedule
-        </Button>
-      </div>
+
     </div>
   </div>
 </template>
@@ -79,7 +67,6 @@ import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { getTodayUpcoming } from '@/api/payload/schedule'
 import { todayRangeISO } from '@/lib/timezone'
 import { authedFetch } from '@/lib/authClient'
-import { useScheduleView } from '@/lib/useScheduleView'
 import { Skeleton } from '@/components/ui/skeleton'
 import { Button } from '@/components/ui/button'
 
@@ -92,8 +79,6 @@ const isLoading = ref(true)
 const error = ref(null)
 const isRefreshing = ref(false)
 const now = ref(new Date())
-
-const { openSchedule } = useScheduleView()
 
 // Update time every 30 seconds and re-fetch data to stay in sync with LiveCard
 let timeInterval = null

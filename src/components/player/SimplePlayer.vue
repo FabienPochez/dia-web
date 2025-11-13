@@ -1,6 +1,6 @@
 <template>
   <div
-    class="w-full h-[60px] bg-neutral-900/90 backdrop-blur text-white rounded-full border border-neutral-500 overflow-hidden flex items-center gap-0 pr-5"
+    class="w-full h-[60px] bg-neutral-900  text-white rounded-lg shadow border border-neutral-600 overflow-hidden flex items-center gap-0 pr-5"
     :style="playerStyle"
   >
     <!-- Reconnect indicator for Live Streams -->
@@ -30,7 +30,7 @@
 
 
 <script setup>
-import { ref, computed, watch } from 'vue'
+import { ref, computed, watch, onMounted } from 'vue'
 
 import { usePlayer, audioRef } from '@/composables/usePlayer.js'
 import { useLiveSchedule } from '@/composables/useLiveSchedule.js'
@@ -40,7 +40,7 @@ import PlayPauseButton from '@/components/player/PlayPauseButton.vue'
 
 const GLOBAL_PLAYER_HEIGHT = 60
 
-const { current, isPlaying, pause, setAndPlay, getAdapterType, seekBusy, isReconnecting } = usePlayer()
+const { current, isPlaying, pause, setAndPlay, getAdapterType, seekBusy, isReconnecting, setDefaultLive } = usePlayer()
 
 // Use shared live schedule data
 const { currentShow, liveMeta } = useLiveSchedule()
@@ -48,6 +48,11 @@ const { currentShow, liveMeta } = useLiveSchedule()
 const playerStyle = computed(() => ({
   '--global-player-height': `${GLOBAL_PLAYER_HEIGHT}px`
 }))
+
+// Preload live info on mount (like GlobalPlayer)
+onMounted(() => {
+  setDefaultLive()
+})
 
 function toggleLivePlayback() {
   if (current.mode === 'live' && isPlaying.value) {

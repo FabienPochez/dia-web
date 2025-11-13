@@ -37,22 +37,9 @@
 
 /* Global layout */
 html, body, #app {
-  height: 100%;
+  min-height: 100vh;
   margin: 0;
   padding: 0;
-}
-
-#app {
-  position: fixed;
-  inset: 0;
-  overflow: hidden;
-}
-
-/* Inner scrollable region */
-.app-scroll {
-  height: 100%;
-  overflow: auto;
-  -webkit-overflow-scrolling: touch;
 }
 
 /* CSS variables */

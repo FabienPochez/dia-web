@@ -2,7 +2,7 @@
 
 <template>
   <div class="max-w-4xl mx-auto">    
-    <Card class="overflow-hidden rounded-none py-0 text-white">
+    <Card class="overflow-hidden shadow border border-neutral-600 rounded-lg py-0 text-white">
       <CardContent class="relative p-0">
         <!-- Loading -->
         <div v-if="isLoading" class="aspect-[4/3]">
