@@ -40,6 +40,14 @@ EXAMPLE
 
 ## Unreleased
 
+### Reset Password Page — 2025-11-27
+- **feat · auth** — Added `/reset-password` route with form to reset Dia app account passwords.
+- **feat · routing** — Installed and configured Vue Router for multi-page navigation.
+- **feat · ui** — Created ResetPassword component with 2-column layout matching WaitingPage branding.
+- **feat · validation** — Implemented password validation (minimum 8 characters, password match check).
+- **feat · api** — Integrated with Payload CMS `/api/users/reset-password` endpoint with error handling.
+- **fix · player** — Fixed SimplePlayer height to remain fixed at 60px on window resize (added min-h/max-h constraints).
+
 ### Debug & Logging — 2025-11-13
 - **fix · debug** — Gated all debug console logs behind DEV environment checks to prevent production logging.
 

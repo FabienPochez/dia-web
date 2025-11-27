@@ -4,7 +4,7 @@
    
 
     <!-- 3 Columns Layout -->
-    <div class="flex flex-col lg:flex-row lg:justify-start gap-4 px-4 py-[8vh] lg:h-screen">
+    <div class="flex flex-col lg:flex-row lg:justify-start gap-4 px-4 py-[1vh] lg:h-screen">
       <!-- Left Column -->
       <div class="flex-shrink-0 w-full lg:w-[350px] overflow-y-auto flex flex-col lg:justify-start gap-4 text-neutral-950">
           <card id="logo-card" class="bg-neutral-900 p-4 rounded-lg border border-neutral-700 shadow">

@@ -1,13 +1,9 @@
 <template>
-  <div 
-  id="app"
-  
-  >
-    <WaitingPage />
+  <div id="app">
+    <router-view />
   </div>
 </template>
 
 <script setup>
-import WaitingPage from './components/WaitingPage.vue'
 </script>
 

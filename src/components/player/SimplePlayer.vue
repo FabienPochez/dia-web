@@ -1,6 +1,6 @@
 <template>
   <div
-    class="w-full h-[60px] bg-neutral-900  text-white rounded-lg shadow border border-neutral-600 overflow-hidden flex items-center gap-0 pr-5"
+    class="w-full h-[60px] min-h-[60px] max-h-[60px] flex-shrink-0 bg-neutral-900 text-white rounded-lg shadow border border-neutral-600 overflow-hidden flex items-center gap-0 pr-5"
     :style="playerStyle"
   >
     <!-- Reconnect indicator for Live Streams -->

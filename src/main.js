@@ -13,12 +13,14 @@ debugLog('[BOOT] web bundle loaded')
 
 import { createApp } from 'vue'
 import App from './App.vue'
+import router from './router'
 import './index.css'
 import '@fontsource/inter/index.css'
 import '@fontsource/azeret-mono/index.css'
 import * as auth from '@/lib/authClient'
 
 const app = createApp(App)
+app.use(router)
 debugLog('[BOOT] About to mount Vue app to #app')
 app.mount('#app')
 debugLog('[BOOT] Vue app mounted successfully')
