@@ -37,12 +37,14 @@
           </div>
 
           <!-- Play/Pause button -->
-          <PlayPauseButton
-            class="absolute bottom-2 right-2"
-            :key="current.id"
-            :isPlaying="isLivePlaying"
-            :onToggle="toggleLive"
-          />
+          <div @click.stop>
+            <PlayPauseButton
+              class="absolute bottom-2 right-2"
+              :key="current.id"
+              :isPlaying="isLivePlaying"
+              :onToggle="toggleLive"
+            />
+          </div>
         </div>
 
         <!-- Live -->
@@ -74,12 +76,14 @@
           </div>
 
           <!-- Play/Pause button -->
-          <PlayPauseButton
-            class="absolute bottom-2 right-2"
-            :key="current.id"
-            :isPlaying="isLivePlaying"
-            :onToggle="toggleLive"
-          />
+          <div @click.stop>
+            <PlayPauseButton
+              class="absolute bottom-2 right-2"
+              :key="current.id"
+              :isPlaying="isLivePlaying"
+              :onToggle="toggleLive"
+            />
+          </div>
         </div>
       </CardContent>
     </Card>
@@ -101,7 +105,7 @@ const { currentShow, liveMeta, timeRange, isLoading, isRefreshing, error } = use
 const { openSchedule } = useScheduleView()
 
 // Player composable
-const streamUrl = 'https://schedule.diaradio.live/main'
+const streamUrl = 'https://livestream.diaradio.live/main'
 const { setAndPlay, pause, current, isPlaying, isReconnecting } = usePlayer()
 
 const isLivePlaying = computed(() =>
@@ -135,8 +139,7 @@ function toggleLive() {
       src: streamUrl,
       title: title.value,
       mode: 'live',
-      cover: coverImage.value,
-      timeRange: timeRange.value
+      cover: coverImage.value
     })
   }
 }

@@ -59,7 +59,7 @@ function toggleLivePlayback() {
     pause()
   } else {
     setAndPlay({
-      src: 'https://schedule.diaradio.live/main',
+      src: 'https://livestream.diaradio.live/main',
       title: liveMeta.value.title,
       mode: 'live',
       cover: liveMeta.value.cover

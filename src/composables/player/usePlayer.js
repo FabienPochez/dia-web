@@ -268,7 +268,7 @@ async function setDefaultLive() {
   setSource({
     id: LIVE_ID,
     title: 'Dia! Live Radio',
-    src: 'https://schedule.diaradio.live/main',
+    src: 'https://livestream.diaradio.live/main',
     mode: 'live',
     cover: ''
   })
@@ -284,7 +284,7 @@ async function setDefaultLive() {
       setSource({
         id: LIVE_ID,
         title: result.title || 'Dia Radio Live Feed',
-        src: 'https://schedule.diaradio.live/main',
+        src: 'https://livestream.diaradio.live/main',
         mode: 'live',
         cover: coverUrl
       })
