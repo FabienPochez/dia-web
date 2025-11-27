@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-neutral-400 ">
+  <div class="min-h-screen bg-neutral-800 ">
     <!-- Header -->
    
 
@@ -7,7 +7,9 @@
     <div class="flex flex-col lg:flex-row lg:justify-start gap-4 px-4 py-[1vh] lg:h-screen">
       <!-- Left Column -->
       <div class="flex-shrink-0 w-full lg:w-[350px] overflow-y-auto flex flex-col lg:justify-start gap-4 text-neutral-950">
-          <card id="logo-card" class="bg-neutral-900 p-4 rounded-lg border border-neutral-700 shadow">
+        <SimplePlayer />
+        
+        <card id="logo-card" class="bg-neutral-900 p-4 rounded-lg border border-neutral-700 shadow">
             <card-content>
               <img src="/img/DIA-LOGO-H-B.gif" alt="DIA! Radio" class="invert" />
             </card-content>
@@ -67,7 +69,8 @@
       <div class="flex-shrink-0 w-full lg:w-[350px] overflow-y-auto flex flex-col gap-4 lg:justify-start">
         <LiveCard />
         
-        <SimplePlayer />
+        <WhatsNext />
+        
         <card id="gimmick-card" class="bg-neutral-900 p-4 rounded-lg border border-neutral-700 shadow">
             <card-content>
               <p class="text-white text-sm">Who cares for algorythms anyway.</p>
@@ -82,7 +85,7 @@
 
       <!-- Right Column -->
       <div class="flex-shrink-0 w-full lg:w-[350px] overflow-y-auto flex flex-col lg:justify-start">
-        <WhatsNext />
+        <PodcastList />
       </div>
     </div>
   </div>
@@ -93,6 +96,7 @@ import { Instagram, Bird, Facebook, Music } from 'lucide-vue-next'
 import LiveCard from './live/LiveCard.vue'
 import WhatsNext from './live/WhatsNext.vue'
 import SimplePlayer from './player/SimplePlayer.vue'
+import PodcastList from './podcast/PodcastList.vue'
 </script>
 
 <style scoped>

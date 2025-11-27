@@ -40,6 +40,13 @@ EXAMPLE
 
 ## Unreleased
 
+### Podcast List — 2025-11-27
+- **feat · podcast** — Added podcast list in third column of WaitingPage with infinite scroll and skeleton loading.
+- **feat · components** — Copied and adapted PodcastCard, PodcastGrid, and PodcastCardSkeleton components from dia-radio-app-rss.
+- **feat · composables** — Created useInfiniteObserver composable for infinite scroll functionality using IntersectionObserver.
+- **feat · ui** — Added `genre-solid` variant to Badge component for podcast genre display.
+- **feat · integration** — Integrated podcast list with existing player system (supports both live and podcast playback).
+
 ### Reset Password Page — 2025-11-27
 - **feat · auth** — Added `/reset-password` route with form to reset Dia app account passwords.
 - **feat · routing** — Installed and configured Vue Router for multi-page navigation.
