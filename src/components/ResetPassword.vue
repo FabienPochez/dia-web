@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-neutral-400">
+  <div class="min-h-screen bg-neutral-800">
     <!-- 2 Columns Layout -->
     <div class="flex flex-col lg:flex-row lg:justify-start gap-4 px-4 py-[8vh] lg:h-screen">
       <!-- Left Column -->
