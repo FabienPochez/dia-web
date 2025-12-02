@@ -45,6 +45,7 @@ EXAMPLE
 - **feat · composables** — Created usePostHog composable to initialize PostHog with API key and configuration.
 - **feat · composables** — Created useAnalytics composable providing track function for event tracking.
 - **feat · routing** — Integrated PostHog pageview tracking with Vue Router navigation.
+- **feat · analytics** — Registered `platform: 'webapp'` as PostHog super property for automatic event tagging.
 
 ### Podcast List — 2025-11-27
 - **feat · podcast** — Added podcast list in third column of WaitingPage with infinite scroll and skeleton loading.

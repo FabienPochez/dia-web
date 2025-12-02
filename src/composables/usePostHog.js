@@ -7,6 +7,7 @@ export function usePostHog() {
       api_host: 'https://us.i.posthog.com',
       person_profiles: 'identified_only'
     })
+    posthog.register({ platform: 'webapp' })
   }
 
   return { posthog }
