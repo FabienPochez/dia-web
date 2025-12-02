@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import WaitingPage from '../components/WaitingPage.vue'
 import ResetPassword from '../components/ResetPassword.vue'
+import { usePostHog } from '@/composables/usePostHog.js'
 
 const routes = [
   {
@@ -18,6 +19,13 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(),
   routes
+})
+
+// Initialize PostHog and track pageviews
+const { posthog } = usePostHog()
+
+router.afterEach((to) => {
+  posthog.capture('$pageview', { page: to.path })
 })
 
 export default router

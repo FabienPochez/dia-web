@@ -40,6 +40,12 @@ EXAMPLE
 
 ## Unreleased
 
+### PostHog Analytics — 2025-12-02
+- **feat · analytics** — Installed and configured PostHog for web analytics and event tracking.
+- **feat · composables** — Created usePostHog composable to initialize PostHog with API key and configuration.
+- **feat · composables** — Created useAnalytics composable providing track function for event tracking.
+- **feat · routing** — Integrated PostHog pageview tracking with Vue Router navigation.
+
 ### Podcast List — 2025-11-27
 - **feat · podcast** — Added podcast list in third column of WaitingPage with infinite scroll and skeleton loading.
 - **feat · components** — Copied and adapted PodcastCard, PodcastGrid, and PodcastCardSkeleton components from dia-radio-app-rss.

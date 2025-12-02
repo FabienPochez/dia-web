@@ -16,6 +16,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-vue-next": "^0.511.0",
+    "posthog-js": "^1.299.0",
     "reka-ui": "^2.6.0",
     "tailwind-merge": "^3.3.1",
     "tw-animate-css": "^1.3.5",
