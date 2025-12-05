@@ -1,19 +1,8 @@
 {
   "rewrites": [
     {
-      "source": "/reset-password",
+      "source": "/(.*)",
       "destination": "/index.html"
-    },
-    {
-      "source": "/",
-      "destination": "/index.html"
-    }
-  ],
-  "redirects": [
-    {
-      "source": "/:path((?!reset-password$).+)",
-      "destination": "/",
-      "permanent": false
     }
   ]
 }
