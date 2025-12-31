@@ -83,7 +83,7 @@ function togglePodcastPlayback() {
       mood: current.mood,
       tone: current.tone,
       realDuration: current.realDuration,
-      episodeDate: current.publishedAt
+      episodeDate: current.firstAiredAt
     })
     updateMediaSession(current.title, 'Podcast Episode', current.cover)
   }

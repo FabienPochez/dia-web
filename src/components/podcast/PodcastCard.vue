@@ -15,8 +15,8 @@
           :onToggle="props.toggle"
         />
       </div>
-     <CardDescription v-if="props.publishedAt" class="pt-3">
-        {{ props.publishedAt }}
+     <CardDescription v-if="props.firstAiredAt" class="pt-3">
+        {{ props.firstAiredAt }}
       </CardDescription>
       <!-- Title -->
         
@@ -55,7 +55,7 @@ const props = defineProps({
     type: Array,
     default: () => [],
   },
-  publishedAt: {
+  firstAiredAt: {
     type: String,
     default: null,
   },

@@ -23,7 +23,7 @@
           pubDate: item.pubDate
         })"
         :genres="item.genres"
-        :publishedAt="item.formattedDate"
+        :firstAiredAt="item.formattedDate"
         :energy="item.energy"
         :mood="item.mood"
         :tone="item.tone"

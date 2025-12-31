@@ -21,7 +21,7 @@ const state = reactive({
     energy: '',
     mood: '',
     tone: '',
-    publishedAt: ''
+    firstAiredAt: ''
   },
   isPlaying: false
 })
@@ -198,7 +198,7 @@ async function setSource({ id, src, title, mode = 'podcast', cover = '', genres,
   state.current.mood = mood || ''
   state.current.tone = tone || ''
   state.current.realDuration = realDuration
-  state.current.publishedAt = episodeDate || ''
+  state.current.firstAiredAt = episodeDate || ''
 
   if (Array.isArray(genres)) {
     state.current.genres = genres

@@ -80,14 +80,14 @@ async function fetchEpisodes(pageNum = 1) {
   error.value = null
   
   try {
-    const url = `/episodes?where[and][0][publishedStatus][equals]=published&sort=-publishedAt&limit=20&page=${pageNum}&depth=1`
+    const url = `/episodes?where[and][0][publishedStatus][equals]=published&sort=-firstAiredAt&limit=20&page=${pageNum}&depth=1`
     
     const res = await authedFetch(url, { signal: abortController.value.signal })
     const json = await res.json()
     
     const episodes = json.docs.map((track) => {
       const coverUrl = track.cover?.url || track.show?.cover?.url
-      const date = track.publishedAt || track.createdAt
+      const date = track.firstAiredAt || track.createdAt
       
       return {
         id: track.id,

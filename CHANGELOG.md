@@ -40,6 +40,11 @@ EXAMPLE
 
 ## Unreleased
 
+### Field Rename — 2025-12-31
+- **refactor · api** — Renamed `publishedAt` to `firstAiredAt` in API queries and data extraction.
+- **refactor · player** — Updated player state to use `firstAiredAt` instead of `publishedAt` for episode dates.
+- **refactor · components** — Updated PodcastCard and PodcastGrid components to use `firstAiredAt` prop.
+
 ### PostHog Analytics — 2025-12-02
 - **feat · analytics** — Installed and configured PostHog for web analytics and event tracking.
 - **feat · composables** — Created usePostHog composable to initialize PostHog with API key and configuration.
