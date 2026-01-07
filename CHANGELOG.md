@@ -40,6 +40,8 @@ EXAMPLE
 
 ## Unreleased
 
+- **fix · schedule** — Removed publishedStatus filter from schedule queries to display new and live shows without published dates.
+
 ### Field Rename — 2025-12-31
 - **refactor · api** — Renamed `publishedAt` to `firstAiredAt` in API queries and data extraction.
 - **refactor · player** — Updated player state to use `firstAiredAt` instead of `publishedAt` for episode dates.

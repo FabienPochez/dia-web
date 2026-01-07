@@ -153,7 +153,6 @@ async function fetchUpcoming(isInitialLoad = false) {
     const params = new URLSearchParams()
     params.set('where[and][0][scheduledAt][greater_than]', now)
     params.set('where[and][1][scheduledAt][exists]', 'true')
-    params.set('where[and][2][publishedStatus][equals]', 'published')
     params.set('sort', 'scheduledAt')
     params.set('limit', '50')
     params.set('depth', '1')
