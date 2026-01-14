@@ -1,0 +1,11 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "2F9LBWAS5U.live.diaradio",
+        "paths": ["/episodes/*"]
+      }
+    ]
+  }
+}

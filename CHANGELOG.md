@@ -40,6 +40,18 @@ EXAMPLE
 
 ## Unreleased
 
+- **feat · ios** — Added iOS Universal Links support with AASA file for /episodes/* paths (2026-01-14).
+
+### iOS Universal Links — 2026-01-14
+- **What changed**: Implemented Apple App Site Association (AASA) file for iOS Universal Links on diaradio.live.
+- **Why**: Enable deep linking from iOS app to web episodes via Universal Links.
+- **Technical**:
+  - Created extensionless AASA file at `/.well-known/apple-app-site-association`
+  - Added Vercel rewrite rule to serve AASA file with correct Content-Type header
+  - Configured appID `2F9LBWAS5U.live.diaradio` with path pattern `/episodes/*`
+- **Files**: `public/.well-known/apple-app-site-association`, `public/.well-known/apple-app-site-association.json`, `vercel.json`
+- **Impact**: iOS users can open episode links directly in the app when installed
+
 - **fix · player** — Added silent pause/play detection to sync player state when browser pauses/plays audio without firing events.
 - **feat · debug** — Added player debugging utility for investigating stream interruptions and state mismatches.
 - **fix · schedule** — Removed publishedStatus filter from schedule queries to display new and live shows without published dates.
