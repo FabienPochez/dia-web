@@ -19,6 +19,13 @@ import '@fontsource/inter/index.css'
 import '@fontsource/azeret-mono/index.css'
 import * as auth from '@/lib/authClient'
 
+// Setup player debugging if debug mode is enabled
+if (__DBG__) {
+  import('./composables/player/debugPlayer.js').then(({ setupPlayerDebugging }) => {
+    setupPlayerDebugging()
+  })
+}
+
 const app = createApp(App)
 app.use(router)
 debugLog('[BOOT] About to mount Vue app to #app')

@@ -56,6 +56,14 @@ function selectAdapterOnce() {
   // Wire state sync
   setupStateSync()
   
+  // Setup debugging if enabled
+  if (__DBG__ && typeof window !== 'undefined' && window.__DIA_PLAYER_DEBUG__) {
+    const audio = __adapter.getAudio?.()
+    if (audio) {
+      window.__DIA_PLAYER_DEBUG__.monitorAudioElement(audio)
+    }
+  }
+  
   return __adapter
 }
 
@@ -64,6 +72,16 @@ function ensureLifecycle() {
   lifecycleUnregister = registerAppLifecycle({
     onForeground: () => {
       appIsActive = true
+      
+      // Check if audio element state doesn't match our state
+      const audio = __adapter?.getAudio?.()
+      if (audio && state.isPlaying && audio.paused && !audio.ended) {
+        if (__DBG__) console.warn('[PLAYER] ⚠️ State mismatch detected: player thinks it\'s playing but audio is paused');
+        // Sync state - audio was paused silently
+        state.isPlaying = false
+        isPlayingRef.value = false
+      }
+      
       if (state.isPlaying && __adapter?.startPlaybackMonitor) {
         __adapter.startPlaybackMonitor()
       }
@@ -87,12 +105,34 @@ function setupStateSync() {
   
   adapter.on?.('play', () => { 
     if (__DBG__) console.log('[FACADE EVT] play'); 
+    const audio = adapter.getAudio?.()
+    if (__DBG__ && audio) {
+      console.log('[FACADE EVT] play - audio state:', {
+        paused: audio.paused,
+        ended: audio.ended,
+        readyState: audio.readyState,
+        networkState: audio.networkState,
+        error: audio.error,
+        src: audio.src
+      })
+    }
     state.isPlaying = true
     isPlayingRef.value = true
   })
   
   adapter.on?.('pause', () => { 
     if (__DBG__) console.log('[FACADE EVT] pause'); 
+    const audio = adapter.getAudio?.()
+    if (__DBG__ && audio) {
+      console.log('[FACADE EVT] pause - audio state:', {
+        paused: audio.paused,
+        ended: audio.ended,
+        readyState: audio.readyState,
+        networkState: audio.networkState,
+        error: audio.error,
+        src: audio.src
+      })
+    }
     state.isPlaying = false
     isPlayingRef.value = false
   })

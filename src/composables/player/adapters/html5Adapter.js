@@ -90,13 +90,39 @@ export function createHtml5Adapter() {
     },
     
     async play() {
-      if (__DBG__) console.log('[AUDIO API] play() called');
+      if (__DBG__) console.log('[AUDIO API] play() called', {
+        paused: audio.paused,
+        readyState: audio.readyState,
+        networkState: audio.networkState
+      });
       try {
         await audio.play()
         if (__DBG__) console.log('✅ audio.play() successful');
       } catch (e) {
         if (__DBG__) console.warn('❌ audio.play() failed:', e);
-        throw e
+        
+        // If play was interrupted by pause, check if we should retry
+        if (e.name === 'AbortError' && e.message?.includes('interrupted by a call to pause')) {
+          if (__DBG__) console.warn('[AUDIO] Play interrupted by pause - checking if should retry...');
+          // Wait a bit and check if audio should actually be playing
+          await new Promise(resolve => setTimeout(resolve, 100));
+          // If audio is not paused and we think it should be playing, retry
+          if (!audio.paused || adapter.isPlaying) {
+            if (__DBG__) console.log('[AUDIO] Retrying play() after interruption');
+            try {
+              await audio.play()
+              if (__DBG__) console.log('✅ audio.play() retry successful');
+            } catch (retryError) {
+              if (__DBG__) console.warn('❌ audio.play() retry failed:', retryError);
+              throw retryError
+            }
+          } else {
+            if (__DBG__) console.log('[AUDIO] Not retrying - audio should be paused');
+            throw e
+          }
+        } else {
+          throw e
+        }
       }
     },
     
@@ -178,7 +204,15 @@ export function createHtml5Adapter() {
     }
 
     a.onpause = () => { 
-      if (__DBG__) console.log('[AUDIO EVT] pause'); 
+      if (__DBG__) console.log('[AUDIO EVT] pause', {
+        paused: a.paused,
+        ended: a.ended,
+        readyState: a.readyState,
+        networkState: a.networkState,
+        error: a.error,
+        currentTime: a.currentTime,
+        src: a.src
+      }); 
       isPlaying = false
       adapter.isPlaying = false
       emit('pause'); 
@@ -255,9 +289,38 @@ export function createHtml5Adapter() {
   const setupVisibilityHandling = () => {
     document.addEventListener('visibilitychange', () => {
       if (document.hidden) {
-        if (__DBG__) console.log('[AUDIO] Page hidden');
+        if (__DBG__) console.log('[AUDIO] Page hidden', {
+          paused: audio.paused,
+          isPlaying: adapter.isPlaying,
+          readyState: audio.readyState,
+          networkState: audio.networkState
+        });
       } else {
-        if (__DBG__) console.log('[AUDIO] Page visible again');
+        if (__DBG__) console.log('[AUDIO] Page visible again', {
+          paused: audio.paused,
+          isPlaying: adapter.isPlaying,
+          readyState: audio.readyState,
+          networkState: audio.networkState,
+          error: audio.error
+        });
+        
+        // Check if audio was paused silently (browser paused it without firing pause event)
+        // But only if it's been paused for a moment (not just transitioning from play())
+        if (adapter.isPlaying && audio.paused && !audio.ended) {
+          // Give it a moment - play() might be in progress
+          setTimeout(() => {
+            if (adapter.isPlaying && audio.paused && !audio.ended) {
+              if (__DBG__) console.warn('[AUDIO] ⚠️ Audio paused silently - was playing but now paused after visibility change');
+              // Sync state - audio is actually paused
+              isPlaying = false
+              adapter.isPlaying = false
+              emit('pause');
+              adapter.emitTimeUpdate?.();
+              logPlayerEvent('Audio paused (silent)')
+              adapter.stopPlaybackMonitor?.()
+            }
+          }, 200)
+        }
       }
     })
   }
@@ -267,6 +330,50 @@ export function createHtml5Adapter() {
     if (playbackInterval) return
     
     playbackInterval = setInterval(() => {
+      // Check for state mismatches in both directions
+      
+      // Case 1: Player thinks it's playing but audio is paused
+      if (isPlaying && audio.paused && !audio.ended) {
+        // Check both cases: if playback started (lastTime > 0) OR if it never started but should have (readyState check)
+        const neverStarted = lastTime === 0 && audio.readyState === 0 && audio.networkState === 1
+        
+        if (lastTime > 0 || neverStarted) {
+          if (__DBG__) console.warn('[AUDIO] ⚠️ Silent pause detected: was playing but audio is now paused', {
+            lastTime,
+            readyState: audio.readyState,
+            networkState: audio.networkState,
+            neverStarted
+          });
+          // Sync state - audio is actually paused
+          isPlaying = false
+          adapter.isPlaying = false
+          emit('pause');
+          adapter.emitTimeUpdate?.();
+          logPlayerEvent('Audio paused (silent)')
+          adapter.stopPlaybackMonitor?.()
+          return
+        }
+      }
+      
+      // Case 2: Player thinks it's paused but audio is actually playing
+      if (!isPlaying && !audio.paused && !audio.ended && audio.readyState >= 2) {
+        if (__DBG__) console.warn('[AUDIO] ⚠️ Silent play detected: was paused but audio is now playing', {
+          lastTime,
+          readyState: audio.readyState,
+          networkState: audio.networkState,
+          currentTime: audio.currentTime
+        });
+        // Sync state - audio is actually playing
+        isPlaying = true
+        adapter.isPlaying = true
+        emit('play');
+        adapter.emitTimeUpdate?.();
+        logPlayerEvent('Audio playing (silent)')
+        adapter.startPlaybackMonitor?.()
+        // Don't return - continue to update time
+      }
+      
+      // Only update time if we think we're playing
       if (!isPlaying) return
       
       const currentTime = audio.currentTime
@@ -305,6 +412,20 @@ export function createHtml5Adapter() {
   // Initialize the adapter
   setupAudioEventHandlers()
   setupVisibilityHandling()
+  
+  // Setup debugging if enabled (check again after a short delay in case debug utility loads after adapter)
+  if (__DBG__ && typeof window !== 'undefined') {
+    const tryAttachDebug = () => {
+      if (window.__DIA_PLAYER_DEBUG__) {
+        console.log('[AUDIO] Attaching debug monitor to audio element')
+        window.__DIA_PLAYER_DEBUG__.monitorAudioElement(audio)
+      } else {
+        // Retry a few times
+        setTimeout(tryAttachDebug, 200)
+      }
+    }
+    setTimeout(tryAttachDebug, 100)
+  }
 
   return adapter
 }

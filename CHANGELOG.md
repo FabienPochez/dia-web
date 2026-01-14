@@ -40,6 +40,8 @@ EXAMPLE
 
 ## Unreleased
 
+- **fix · player** — Added silent pause/play detection to sync player state when browser pauses/plays audio without firing events.
+- **feat · debug** — Added player debugging utility for investigating stream interruptions and state mismatches.
 - **fix · schedule** — Removed publishedStatus filter from schedule queries to display new and live shows without published dates.
 
 ### Field Rename — 2025-12-31
