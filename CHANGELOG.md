@@ -40,6 +40,7 @@ EXAMPLE
 
 ## Unreleased
 
+- **feat · player** — Updated timeline/scrubber design to match app: replaced Slider with ProgressBar component (5px normal height, 8px when scrubbing, pink #A54995) (2026-01-14).
 - **feat · ios** — Added iOS Universal Links support with AASA file for /episodes/* paths (2026-01-14).
 
 ### iOS Universal Links — 2026-01-14

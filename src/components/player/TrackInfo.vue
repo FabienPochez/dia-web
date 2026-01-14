@@ -35,19 +35,19 @@
               </p>
             </div>
 
-            <!-- Timeline slider -->
-            <Slider
-              v-model="dragValue"
-              :min="0"
-              :max="duration || 0"
-              :step="1"
-              :disabled="!duration || duration <= 0"
-              @valueCommit="onSliderCommit"
-              @update:modelValue="onSliderDrag"
-              @pointerdown="onSliderPointerDown"
-              aria-label="Timeline"
-              class="w-full [&_[data-slot=slider-track]]:bg-light-blue [&_[data-slot=slider-track]]:h-[2px] [&_[data-slot=slider-track]]:pointer-events-none [&_[data-slot=slider-range]]:bg-pink [&_[data-slot=slider-range]]:pointer-events-none [&_[data-slot=slider-thumb]]:bg-pink [&_[data-slot=slider-thumb]]:w-3 [&_[data-slot=slider-thumb]]:h-3 [&_[data-slot=slider-thumb]]:border-pink [&_[data-slot=slider-thumb]]:pointer-events-auto"
-            />
+            <!-- Timeline progress bar -->
+            <div ref="sliderRef" class="w-full">
+              <ProgressBar
+                :model-value="dragValue[0]"
+                :min="0"
+                :max="duration || 0"
+                :disabled="!duration || duration <= 0"
+                variant="rounded"
+                @update:modelValue="onProgressUpdate"
+                @valueCommit="onProgressCommit"
+                @scrubbing="onScrubbing"
+              />
+            </div>
 
             <!-- Duration -->
             <div class="font-sans text-center text-xs text-gray-400">
@@ -65,7 +65,7 @@
 
 <script setup>
 import { computed, ref, watch } from 'vue'
-import Slider from '@/components/ui/slider/Slider.vue'
+import ProgressBar from '@/components/player/ProgressBar.vue'
 import { usePlayer } from '@/composables/usePlayer.js'
 
 defineProps({
@@ -78,6 +78,7 @@ const { displayCurrentTime, duration, isLive, seekBusy, seek, uiTimeRef, isUiFro
 // Drag state management
 const dragValue = ref([0])
 const isDragging = ref(false)
+const sliderRef = ref(null)
 
 // Sync dragValue with uiTimeRef when not dragging
 watch(uiTimeRef, (newValue) => {
@@ -96,23 +97,20 @@ const remaining = computed(() => {
   return Math.max(0, (duration.value || 0) - (displayCurrentTime.value || 0))
 })
 
-function onSliderDrag() {
+function onProgressUpdate(value) {
   isDragging.value = true
+  dragValue.value = [value]
 }
 
-function onSliderCommit() {
+function onProgressCommit(value) {
   isDragging.value = false
-  const newTime = dragValue.value[0]
-  if (import.meta.env.DEV && (globalThis.DIA_DEBUG ?? false)) console.log('[UI] seek request', { to: newTime, via: 'facade' });
-  seek(newTime)
+  dragValue.value = [value]
+  if (import.meta.env.DEV && (globalThis.DIA_DEBUG ?? false)) console.log('[UI] seek request', { to: value, via: 'facade' });
+  seek(value)
 }
 
-function onSliderPointerDown(event) {
-  // Only allow thumb interactions, block rail clicks
-  if (!event.target.closest('[data-slot="slider-thumb"]')) {
-    event.preventDefault()
-    event.stopPropagation()
-  }
+function onScrubbing(scrubbing) {
+  isDragging.value = scrubbing
 }
 </script>
 
