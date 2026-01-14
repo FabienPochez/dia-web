@@ -11,7 +11,7 @@
         
         <card id="logo-card" class="bg-neutral-900 p-4 rounded-lg border border-neutral-700 shadow">
             <card-content>
-              <img src="/img/DIA-LOGO-H-B.gif" alt="DIA! Radio" class="invert" />
+              <img src="/img/DIA-LOGO-ALT.svg" alt="DIA! Radio" />
             </card-content>
           </card>
           <card id="message-card" class="bg-neutral-900 p-4 rounded-lg border border-neutral-700 shadow">
@@ -78,7 +78,7 @@
           </card>
         <card id="logo-card-smiley" class="bg-neutral-900 border border-neutral-700 rounded-lg shadow">
           <card-content>
-            <img src="/img/Logo-Dia-bouge.gif" alt="DIA! Radio" />
+            <AnimatedLogo />
         </card-content>
         </card>
       </div>
@@ -97,6 +97,7 @@ import LiveCard from './live/LiveCard.vue'
 import WhatsNext from './live/WhatsNext.vue'
 import SimplePlayer from './player/SimplePlayer.vue'
 import PodcastList from './podcast/PodcastList.vue'
+import AnimatedLogo from './shared/AnimatedLogo.vue'
 </script>
 
 <style scoped>

@@ -40,6 +40,7 @@ EXAMPLE
 
 ## Unreleased
 
+- **feat · ui** — Updated logo card: replaced GIF with SVG (DIA-LOGO-ALT.svg) and replaced animated GIF with animated PNG sequence (DIA_SIGLE_01-03) with fade transitions (2026-01-14).
 - **feat · player** — Updated timeline/scrubber design to match app: replaced Slider with ProgressBar component (5px normal height, 8px when scrubbing, pink #A54995) (2026-01-14).
 - **feat · ios** — Added iOS Universal Links support with AASA file for /episodes/* paths (2026-01-14).
 
