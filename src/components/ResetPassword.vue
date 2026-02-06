@@ -1,12 +1,12 @@
 <template>
-  <div class="min-h-screen bg-neutral-800">
+  <div class="min-h-screen bg-neutral-800 ">
     <!-- 2 Columns Layout -->
-    <div class="flex flex-col lg:flex-row lg:justify-start gap-4 px-4 py-[8vh] lg:h-screen">
+    <div class="flex flex-col lg:flex-row lg:justify-start gap-4 px-4 py-[1vh] lg:h-screen">
       <!-- Left Column -->
       <div class="flex-shrink-0 w-full lg:w-[350px] overflow-y-auto flex flex-col lg:justify-start gap-4 text-neutral-950">
         <card id="logo-card" class="bg-neutral-900 p-4 rounded-lg border border-neutral-700 shadow cursor-pointer hover:opacity-90 transition-opacity" @click="goHome">
           <card-content>
-            <img src="/img/DIA-LOGO-H-B.gif" alt="DIA! Radio" class="invert" />
+            <img src="/img/DIA-LOGO-ALT.svg" alt="DIA! Radio" />
           </card-content>
         </card>
         <card id="message-card" class="bg-neutral-900 p-4 rounded-lg border border-neutral-700 shadow">
@@ -140,7 +140,7 @@
         <!-- Logo Smiley Card -->
         <card id="logo-card-smiley" class="bg-neutral-900 border border-neutral-700 rounded-lg shadow cursor-pointer hover:opacity-90 transition-opacity" @click="goHome">
           <card-content>
-            <img src="/img/Logo-Dia-bouge.gif" alt="DIA! Radio" />
+            <AnimatedLogo />
           </card-content>
         </card>
       </div>
@@ -153,6 +153,7 @@ import { ref, computed, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { Instagram, Facebook, Music } from 'lucide-vue-next'
 import Button from './ui/button/Button.vue'
+import AnimatedLogo from './shared/AnimatedLogo.vue'
 
 const route = useRoute()
 const router = useRouter()
