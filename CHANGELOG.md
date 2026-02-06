@@ -40,6 +40,9 @@ EXAMPLE
 
 ## 2026-02-06
 
+- **feat · legal** — Added Privacy Policy page at /privacy route with full privacy policy content (13 sections covering data collection, analytics, account deletion, and user rights).
+- **feat · legal** — Added Terms of Service page at /terms route with complete terms content (11 sections covering service usage, accounts, content, and liability).
+- **feat · routing** — Added /privacy and /terms routes to Vue Router for legal pages (Option C implementation from audit).
 - **feat · ui** — Updated ResetPassword page to match WaitingPage branding: replaced logo GIF with SVG (DIA-LOGO-ALT.svg), replaced static GIF with AnimatedLogo component, and matched padding (py-[1vh]).
 - **docs · audit** — Added Nuxt 3 integration audit document analyzing options for adding /privacy and /terms static pages.
 
