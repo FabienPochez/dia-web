@@ -38,10 +38,13 @@ EXAMPLE
 
 # Changelog
 
+## 2026-02-06
+
+- **feat · ui** — Updated ResetPassword page to match WaitingPage branding: replaced logo GIF with SVG (DIA-LOGO-ALT.svg), replaced static GIF with AnimatedLogo component, and matched padding (py-[1vh]).
+- **docs · audit** — Added Nuxt 3 integration audit document analyzing options for adding /privacy and /terms static pages.
+
 ## Unreleased
 
-- **feat · ui** — Updated ResetPassword page to match WaitingPage branding: replaced logo GIF with SVG (DIA-LOGO-ALT.svg), replaced static GIF with AnimatedLogo component, and matched padding (py-[1vh]) (2026-02-06).
-- **docs · audit** — Added Nuxt 3 integration audit document analyzing options for adding /privacy and /terms static pages (2026-02-06).
 - **feat · ui** — Updated logo card: replaced GIF with SVG (DIA-LOGO-ALT.svg) and replaced animated GIF with animated PNG sequence (DIA_SIGLE_01-03) with fade transitions (2026-01-14).
 - **feat · player** — Updated timeline/scrubber design to match app: replaced Slider with ProgressBar component (5px normal height, 8px when scrubbing, pink #A54995) (2026-01-14).
 - **feat · ios** — Added iOS Universal Links support with AASA file for /episodes/* paths (2026-01-14).
