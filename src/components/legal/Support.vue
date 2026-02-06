@@ -56,8 +56,8 @@
         </card>
       </div>
 
-      <!-- Center Column (Wider - spans 2 column spaces) -->
-      <div class="flex-shrink-0 w-full lg:w-[700px] overflow-y-auto flex flex-col gap-4 lg:justify-start">
+      <!-- Center Column -->
+      <div class="flex-shrink-0 w-full lg:w-[350px] overflow-y-auto flex flex-col gap-4 lg:justify-start">
         <!-- Support Content Card -->
         <card id="support-content-card" class="bg-neutral-900 p-6 rounded-lg border border-neutral-700 shadow">
           <card-content>
