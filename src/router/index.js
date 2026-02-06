@@ -3,6 +3,7 @@ import WaitingPage from '../components/WaitingPage.vue'
 import ResetPassword from '../components/ResetPassword.vue'
 import Privacy from '../components/legal/Privacy.vue'
 import Terms from '../components/legal/Terms.vue'
+import Support from '../components/legal/Support.vue'
 import { usePostHog } from '@/composables/usePostHog.js'
 
 const routes = [
@@ -25,6 +26,11 @@ const routes = [
     path: '/terms',
     name: 'Terms',
     component: Terms
+  },
+  {
+    path: '/support',
+    name: 'Support',
+    component: Support
   },
   {
     path: '/:pathMatch(.*)*',
