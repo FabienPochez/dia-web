@@ -88,16 +88,78 @@
         <PodcastList />
       </div>
     </div>
+
+    <!-- Episode modal (shareable /episodes/:slug) -->
+    <EpisodeModal
+      :open="isEpisodeModalOpen"
+      :episode="selectedEpisode"
+      :episode-not-found="episodeNotFound"
+      @close="handleEpisodeModalClose"
+    />
   </div>
 </template>
 
 <script setup>
+import { ref, watch } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import { Instagram, Bird, Facebook, Music } from 'lucide-vue-next'
 import LiveCard from './live/LiveCard.vue'
 import WhatsNext from './live/WhatsNext.vue'
 import SimplePlayer from './player/SimplePlayer.vue'
 import PodcastList from './podcast/PodcastList.vue'
 import AnimatedLogo from './shared/AnimatedLogo.vue'
+import EpisodeModal from './episodes/EpisodeModal.vue'
+import { useEpisodes } from '@/composables/useEpisodes'
+import { fetchEpisodeBySlug } from '@/api/payload/episodes'
+
+const route = useRoute()
+const router = useRouter()
+const { items, fetchEpisodes, findEpisodeBySlug } = useEpisodes()
+
+const selectedEpisode = ref(null)
+const isEpisodeModalOpen = ref(false)
+const episodeNotFound = ref(false)
+
+watch(
+  () => route.params.slug,
+  async (slug) => {
+    if (!slug) {
+      isEpisodeModalOpen.value = false
+      selectedEpisode.value = null
+      episodeNotFound.value = false
+      return
+    }
+    // Ensure episodes list is loaded (reuse existing logic)
+    if (items.value.length === 0) {
+      await fetchEpisodes(1)
+    }
+    const found = findEpisodeBySlug(slug)
+    if (found) {
+      selectedEpisode.value = found
+      episodeNotFound.value = false
+      isEpisodeModalOpen.value = true
+    } else {
+      const episode = await fetchEpisodeBySlug(slug)
+      if (episode) {
+        selectedEpisode.value = episode
+        episodeNotFound.value = false
+        isEpisodeModalOpen.value = true
+      } else {
+        selectedEpisode.value = null
+        episodeNotFound.value = true
+        isEpisodeModalOpen.value = true
+      }
+    }
+  },
+  { immediate: true }
+)
+
+function handleEpisodeModalClose() {
+  router.replace('/')
+  isEpisodeModalOpen.value = false
+  selectedEpisode.value = null
+  episodeNotFound.value = false
+}
 </script>
 
 <style scoped>

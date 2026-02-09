@@ -49,6 +49,10 @@ EXAMPLE
 
 ## Unreleased
 
+- **feat · routing** — Added shareable episode URLs at /episodes/:slug; opens modal with episode details; Play uses existing global player; closing modal replaces URL with / (2026-02-09).
+- **feat · ui** — Added EpisodeModal (shadcn-vue Dialog) with EpisodeModalContent for episode cover, title, date, genres, description, and Play button (2026-02-09).
+- **feat · api** — Added fetchEpisodeBySlug in api/payload/episodes.ts for Payload CMS slug resolution (2026-02-09).
+- **refactor · podcast** — Extracted useEpisodes composable; PodcastList now consumes shared list; added slug to episode mapping (2026-02-09).
 - **feat · ui** — Updated logo card: replaced GIF with SVG (DIA-LOGO-ALT.svg) and replaced animated GIF with animated PNG sequence (DIA_SIGLE_01-03) with fade transitions (2026-01-14).
 - **feat · player** — Updated timeline/scrubber design to match app: replaced Slider with ProgressBar component (5px normal height, 8px when scrubbing, pink #A54995) (2026-01-14).
 - **feat · ios** — Added iOS Universal Links support with AASA file for /episodes/* paths (2026-01-14).

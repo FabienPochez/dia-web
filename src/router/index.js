@@ -13,6 +13,11 @@ const routes = [
     component: WaitingPage
   },
   {
+    path: '/episodes/:slug',
+    name: 'Episode',
+    component: WaitingPage
+  },
+  {
     path: '/reset-password',
     name: 'ResetPassword',
     component: ResetPassword
