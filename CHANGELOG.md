@@ -49,6 +49,8 @@ EXAMPLE
 
 ## Unreleased
 
+- **feat · ui** — EpisodeModalContent: NowPlayingDrawer-style layout (date+share, title+SoundCloud, genres, description); share button (Web Share API or clipboard); soundcloudUrl from Payload (2026-02-09).
+- **feat · assets** — Added SoundCloud logos (white/black); removed old logo GIFs and PNGs; updated fallback-live.jpg (2026-02-09).
 - **feat · podcast** — Episode cards clickable on image and title to open EpisodeModal with episode details (2026-02-09).
 - **fix · player** — PlayPauseButton: call onToggle synchronously (removed requestAnimationFrame) so audio.play() runs within user gesture for autoplay policy (2026-02-09).
 - **feat · routing** — Added shareable episode URLs at /episodes/:slug; opens modal with episode details; Play uses existing global player; closing modal replaces URL with / (2026-02-09).

@@ -46,6 +46,7 @@ export interface EpisodeForModal {
   formattedDate?: string | null
   firstAiredAt?: string
   show?: { id: string; title?: string }
+  soundcloudUrl?: string | null
 }
 
 function mapPayloadDocToEpisode(doc: Record<string, unknown>): EpisodeForModal {
@@ -54,6 +55,11 @@ function mapPayloadDocToEpisode(doc: Record<string, unknown>): EpisodeForModal {
   const genres = Array.isArray(doc.genres)
     ? (doc.genres as unknown[]).map((g) => (typeof g === 'string' ? g : (g as { name?: string })?.name)).filter(Boolean)
     : []
+
+  const soundcloudUrl =
+    (doc.soundcloudUrl as string) ||
+    (doc.soundcloud as string) ||
+    ((doc.url as string)?.includes('soundcloud.com') ? (doc.url as string) : null)
 
   return {
     id: String(doc.id),
@@ -75,6 +81,7 @@ function mapPayloadDocToEpisode(doc: Record<string, unknown>): EpisodeForModal {
     show: doc.show && typeof doc.show === 'object'
       ? { id: String((doc.show as { id?: string }).id), title: (doc.show as { title?: string }).title }
       : undefined,
+    soundcloudUrl: soundcloudUrl || undefined,
   }
 }
 

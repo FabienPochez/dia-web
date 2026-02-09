@@ -46,6 +46,9 @@ function extractStringValue(value) {
 function mapTrackToItem(track) {
   const coverUrl = track.cover?.url || track.show?.cover?.url
   const date = track.firstAiredAt || track.createdAt
+  const soundcloudUrl =
+    track.soundcloudUrl || track.soundcloud || (track.url?.includes('soundcloud.com') ? track.url : null)
+
   return {
     id: track.id,
     slug: track.slug,
@@ -62,6 +65,7 @@ function mapTrackToItem(track) {
     energy: extractStringValue(track.energy),
     mood: extractStringValue(track.mood),
     tone: extractStringValue(track.tone),
+    soundcloudUrl: soundcloudUrl || undefined,
   }
 }
 
