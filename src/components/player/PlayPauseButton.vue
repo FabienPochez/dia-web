@@ -38,12 +38,9 @@ watch(() => props.isPlaying, () => {
 const handleToggle = async () => {
   if (isLoading.value) return
   isLoading.value = true
-  // Let the spinner render before starting any heavy/async work
   await nextTick()
-  requestAnimationFrame(() => {
-    // Fire and forget—parent will set isPlaying when ready, which clears loading via the watcher
-    try { props.onToggle && props.onToggle() } catch {}
-  })
+  // Call onToggle synchronously—audio.play() requires a user gesture; rAF defers and breaks autoplay
+  try { props.onToggle && props.onToggle() } catch {}
 }
 </script>
 

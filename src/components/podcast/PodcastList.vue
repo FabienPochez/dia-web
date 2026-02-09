@@ -4,6 +4,7 @@
       :items="items"
       :isEpisodePlaying="isEpisodePlaying"
       :toggleEpisode="toggleEpisode"
+      :on-episode-click="onEpisodeClick"
       :isLoading="isLoading"
       :skeletonCount="items.length === 0 && isLoading ? 6 : (items.length > 0 && isLoading ? 4 : 0)"
       cols="grid-cols-1"
@@ -21,6 +22,10 @@ import { usePlayer } from '@/composables/usePlayer.js'
 import PodcastGrid from '@/components/podcast/PodcastGrid.vue'
 import { useInfiniteObserver } from '@/composables/useInfiniteObserver'
 import { useEpisodes } from '@/composables/useEpisodes'
+
+const props = defineProps({
+  onEpisodeClick: { type: Function, default: null }
+})
 
 const { isEpisodePlaying, toggleEpisode } = usePlayer()
 const { items, isLoading, fetchEpisodes, loadNext } = useEpisodes()

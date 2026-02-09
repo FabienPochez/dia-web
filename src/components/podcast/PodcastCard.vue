@@ -2,7 +2,10 @@
   <Card class="w-full text-white rounded-none bg-transparent border-b border-t-0 border-r-0 border-l-0 border-neutral-500 py-0 gap-0">
     <CardContent class="p-0">
       <!-- Image with play button -->
-      <div class="relative aspect-3/2 w-full overflow-hidden rounded-lg">
+      <div
+        class="relative aspect-3/2 w-full overflow-hidden rounded-lg cursor-pointer"
+        @click="props.slug && props.onEpisodeClick?.(props.slug)"
+      >
         <img
           :src="props.image"
           :alt="props.title"
@@ -13,15 +16,17 @@
           :key="props.episodeId + '-' + (props.isPlaying ? 'active' : 'inactive')"
           :isPlaying="props.isPlaying"
           :onToggle="props.toggle"
+          @click.stop
         />
       </div>
      <CardDescription v-if="props.firstAiredAt" class="pt-3">
         {{ props.firstAiredAt }}
       </CardDescription>
       <!-- Title -->
-        
-      <div class=" pt-3">
-        
+      <div
+        class="pt-3 cursor-pointer"
+        @click="props.slug && props.onEpisodeClick?.(props.slug)"
+      >
         <h3 class="uppercase font-semibold">{{ props.title }}</h3>
       </div>
 
@@ -51,6 +56,8 @@ const props = defineProps({
   isPlaying: Boolean,
   toggle: Function,
   episodeId: String,
+  slug: String,
+  onEpisodeClick: Function,
   genres: {
     type: Array,
     default: () => [],

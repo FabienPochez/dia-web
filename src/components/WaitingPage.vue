@@ -85,7 +85,7 @@
 
       <!-- Right Column -->
       <div class="flex-shrink-0 w-full lg:w-[350px] overflow-y-auto flex flex-col lg:justify-start">
-        <PodcastList />
+        <PodcastList :on-episode-click="(slug) => slug && router.push(`/episodes/${slug}`)" />
       </div>
     </div>
 

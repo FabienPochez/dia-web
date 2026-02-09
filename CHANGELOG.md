@@ -49,6 +49,8 @@ EXAMPLE
 
 ## Unreleased
 
+- **feat · podcast** — Episode cards clickable on image and title to open EpisodeModal with episode details (2026-02-09).
+- **fix · player** — PlayPauseButton: call onToggle synchronously (removed requestAnimationFrame) so audio.play() runs within user gesture for autoplay policy (2026-02-09).
 - **feat · routing** — Added shareable episode URLs at /episodes/:slug; opens modal with episode details; Play uses existing global player; closing modal replaces URL with / (2026-02-09).
 - **feat · ui** — Added EpisodeModal (shadcn-vue Dialog) with EpisodeModalContent for episode cover, title, date, genres, description, and Play button (2026-02-09).
 - **feat · api** — Added fetchEpisodeBySlug in api/payload/episodes.ts for Payload CMS slug resolution (2026-02-09).

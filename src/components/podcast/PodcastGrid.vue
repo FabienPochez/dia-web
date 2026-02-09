@@ -7,6 +7,8 @@
         :key="item.id"
         :title="item.title"
         :image="item.image"
+        :slug="item.slug"
+        :on-episode-click="onEpisodeClick"
         :isPlaying="isEpisodePlaying(item.id)"
         :episode-id="item.id"
         :toggle="() => toggleEpisode({
@@ -60,6 +62,10 @@ const props = defineProps({
   toggleEpisode: {
     type: Function,
     required: true
+  },
+  onEpisodeClick: {
+    type: Function,
+    default: null
   },
   gap: {
     type: String,
