@@ -49,6 +49,7 @@ EXAMPLE
 
 ## Unreleased
 
+- **feat · player** — EpisodeModal uses PlayerOverlayControls (NowPlayingDrawer-style): gradient overlay, play/pause, skip ±30s, progress bar with seek; accepts episode prop for modal context (2026-02-09).
 - **feat · ui** — EpisodeModalContent: NowPlayingDrawer-style layout (date+share, title+SoundCloud, genres, description); share button (Web Share API or clipboard); soundcloudUrl from Payload (2026-02-09).
 - **feat · assets** — Added SoundCloud logos (white/black); removed old logo GIFs and PNGs; updated fallback-live.jpg (2026-02-09).
 - **feat · podcast** — Episode cards clickable on image and title to open EpisodeModal with episode details (2026-02-09).
