@@ -159,7 +159,7 @@ const isPlayButtonActive = computed(() => {
       :is-playing="isPlayButtonActive"
       :seek-busy="seekBusy"
       :on-toggle="onToggle"
-      class="pointer-events-auto !w-20 !h-20 bg-transparent text-white"
+      class="pointer-events-auto !w-20 !h-20 bg-transparent text-white border-0 ring-0 focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:outline-none hover:!bg-transparent dark:hover:!bg-transparent"
     />
 
     <button
