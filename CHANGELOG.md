@@ -38,6 +38,11 @@ EXAMPLE
 
 # Changelog
 
+## 2026-02-09
+
+- **feat · seo** — SSR metadata for shared episode links: Vercel Edge Middleware returns OG/Twitter meta to crawlers (Twitter, Facebook, Discord, etc.); humans get SPA pass-through (2026-02-09).
+- **feat · infra** — Added middleware.ts with bot detection, Payload API fetch by slug, minimal HTML response; docs/EPISODE_SHARE_META.md (2026-02-09).
+
 ## 2026-02-06
 
 - **feat · support** — Added Support page at /support route with contact information (support@diaradio.live).

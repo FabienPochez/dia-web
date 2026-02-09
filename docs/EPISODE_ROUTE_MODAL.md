@@ -14,7 +14,7 @@ The dia-web app supports shareable episode URLs at `/episodes/:slug`. Visiting s
 
 ## Limitations
 
-- **No SSR meta**: Episode meta (title, description) for SEO is not yet server-rendered. Consider adding when migrating to Nuxt.
+- **SSR meta for bots only**: Link preview bots receive OG/Twitter meta via Vercel Edge Middleware; see `docs/EPISODE_SHARE_META.md`. Normal browser visits still load the SPA; meta is not injected for humans.
 - **Refresh on Vercel**: The SPA fallback in `vercel.json` ensures `/episodes/:slug` loads correctly on refresh (all routes fallback to `index.html`).
 
 ## Files
