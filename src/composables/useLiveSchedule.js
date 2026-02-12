@@ -17,6 +17,7 @@ const PRE_ROLL_MS = 90_000
 const CONFIRM_MS = 30_000
 const HEARTBEAT_MS = 5 * 60_000
 const JITTER_RANGE_MS = 20_000
+const MIN_BOUNDARY_DELAY_MS = 15_000
 let fetchCount = 0
 
 // Cover image resolver
@@ -116,8 +117,10 @@ function scheduleNextTimers(show) {
     await fetchLiveSchedule(false)
   }
 
-  activeTimeout = setTimeout(() => tick('pre-roll'), preDelay)
-  heartbeatTimeout = setTimeout(() => tick('confirm'), confirmDelay)
+  if (preDelay >= MIN_BOUNDARY_DELAY_MS) {
+    activeTimeout = setTimeout(() => tick('pre-roll'), preDelay)
+  }
+  heartbeatTimeout = setTimeout(() => tick('confirm'), Math.max(MIN_BOUNDARY_DELAY_MS, confirmDelay))
 }
 
 function startSchedule() {

@@ -54,6 +54,7 @@ EXAMPLE
 
 ## Unreleased
 
+- **fix · schedule** — Prevented runaway API requests in useLiveSchedule: added MIN_BOUNDARY_DELAY_MS (15s) to prevent 0ms timer scheduling near show-end; pre-roll timer skipped when delay < 15s; confirm timer enforces minimum delay (2026-02-12).
 - **feat · player** — EpisodeModal uses PlayerOverlayControls (NowPlayingDrawer-style): gradient overlay, play/pause, skip ±30s, progress bar with seek; accepts episode prop for modal context (2026-02-09).
 - **feat · ui** — EpisodeModalContent: NowPlayingDrawer-style layout (date+share, title+SoundCloud, genres, description); share button (Web Share API or clipboard); soundcloudUrl from Payload (2026-02-09).
 - **feat · assets** — Added SoundCloud logos (white/black); removed old logo GIFs and PNGs; updated fallback-live.jpg (2026-02-09).
