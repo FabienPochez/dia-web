@@ -4,7 +4,7 @@
 
 - **Root cause**: `useLiveSchedule.js` → `scheduleNextTimers()` schedules a `setTimeout(..., preDelay)` where `preDelay` can be **0** when the current show is within 90 seconds of its `scheduledEnd`.
 - **Runaway path**: `preDelay = 0` → tick fires immediately → `fetchLiveSchedule()` → `getNowPlaying()` (same query) → same show returned → `preDelay` still 0 → re-schedule with 0 → **tight loop**.
-- **Exact API**: `GET /api/episodes?where[and][0][scheduledAt][less_than_or_equal]=...&where[and][1][scheduledEnd][greater_than]=...&where[and][2][scheduledAt][exists]=true&sort=scheduledAt&limit=50&depth=1` issued by `getNowPlaying()` in `src/api/payload/schedule.ts`.
+- **Exact API**: `GET /api/episodes?where[and][0][scheduledAt][less_than_equal]=...&where[and][1][scheduledEnd][greater_than]=...&where[and][2][scheduledAt][exists]=true&sort=scheduledAt&limit=50&depth=1` issued by `getNowPlaying()` in `src/api/payload/schedule.ts`.
 - **Trigger components**: `LiveCard.vue` and `SimplePlayer.vue` both use `useLiveSchedule()`, which shares module-level state; first mount starts the schedule.
 - **Polling design**: Intended refresh cadence is heartbeat (5 min), pre-roll (90 s before show end), and confirm (30 s after show end); no `setInterval`.
 - **Bug**: `Math.max(0, end - now - PRE_ROLL_MS + jitter())` yields 0 when `end - now < 90_000`, causing immediate re-scheduling and thus multiple requests per second.

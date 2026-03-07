@@ -14,7 +14,7 @@ export async function getNowPlaying({ signal }: { signal?: AbortSignal } = {}): 
   const now = new Date().toISOString()
   
   const params = new URLSearchParams()
-  params.set('where[and][0][scheduledAt][less_than_or_equal]', now)
+  params.set('where[and][0][scheduledAt][less_than_equal]', now)
   params.set('where[and][1][scheduledEnd][greater_than]', now)
   params.set('where[and][2][scheduledAt][exists]', 'true')
   params.set('sort', 'scheduledAt')
@@ -31,7 +31,7 @@ export async function getNowPlaying({ signal }: { signal?: AbortSignal } = {}): 
 export async function getTodayUpcoming({ signal, limit = 20 }: { signal?: AbortSignal; limit?: number } = {}): Promise<ScheduleItem[]> {
   const { start, end } = todayRangeISO()
   const params = new URLSearchParams()
-  params.set('where[and][0][scheduledAt][greater_than_or_equal]', start)
+  params.set('where[and][0][scheduledAt][greater_than_equal]', start)
   params.set('where[and][1][scheduledAt][less_than]', end)
   params.set('where[and][2][scheduledAt][exists]', 'true')
   params.set('sort', 'scheduledAt')
